@@ -1,6 +1,5 @@
 ### Logistics Customer Repository  
-#### * SQL code for one of my consulting customers  
-#### * Use of BigQuery and Google Cloud Platform for production   
+#### * SQL code (BigQuery) and use of Google Cloud Platform for production  
 #### * Dashboards and marketing material from SQL queries in Data Studio  
 #### * Productionalized webscraping  
 
