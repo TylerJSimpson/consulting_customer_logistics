@@ -18,7 +18,7 @@ my_username = "REDACTED"
 my_password = "REDACTED"
 
 #log in on parent website
-driver.get("https://www.loadmatch.com/login.cfm?returnURL=DD/directory/results.cfm?city%3DSAV%26added%3DNewest")
+driver.get("REDACTED")
 wait=WebDriverWait(driver,5)
 #push login details
 driver.find_element_by_name("contact_username").send_keys(my_username)
@@ -28,7 +28,7 @@ wait=WebDriverWait(driver,3)
 
 #switch to correct subsite
 wait=WebDriverWait(driver,10)
-driver.get("https://www.drayage.com/directory/results.cfm?city=SAV&port=y&OceanCntrs=y&drvrs=y&showClicks=y")
+driver.get("REDACTED")
 #iterate through the "details" popup
 trs = wait.until(EC.visibility_of_all_elements_located((By.XPATH,"//html/body/table/tbody/tr/td/table[1]//tr[position()>2]")))
 window_before = driver.window_handles[0]
