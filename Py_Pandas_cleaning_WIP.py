@@ -34,7 +34,7 @@ df1["Phone"]=df["Customer"].apply(lambda x: find_phone(x))
 
 #function to find hazmat status and add it to the hazmat column
 def find_hazmat(text):
-    hazmat = re.findall(r"\wmat=\b(\w*)",str(text))
+    hazmat = re.findall(r"^haz-mat=$", str(text), re.IGNORECASE)
     return ",".join(hazmat)
 df1["Hazmat"]=df["Customer"].apply(lambda x: find_hazmat(x))
 
