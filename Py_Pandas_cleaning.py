@@ -1,5 +1,5 @@
-#WEBSCRAPE CLEANING
-#Python3, Pandas, Regular
+#WEBSCRAPED CSV CLEANING
+#Python3, Pandas, RegEx
 
 #import packages
 import pandas as pd
