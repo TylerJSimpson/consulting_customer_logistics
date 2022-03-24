@@ -1,4 +1,4 @@
-#CLEAN DRAYAGE.COM WEBSCRAPE
+#WEBSCRAPE CLEANING
 #Python3, Pandas, Regular
 
 #import packages
@@ -34,14 +34,12 @@ df1["Phone"]=df["Customer"].apply(lambda x: find_phone(x))
 
 #function to find hazmat status and add it to the hazmat column
 def find_hazmat(text):
-    hazmat = re.findall(r"^haz-mat=$", str(text), re.IGNORECASE)
-    return ",".join(hazmat)
+    hazmat = re.findall("haz-mat=yes", str(text), re.IGNORECASE)
+    return "Yes" if hazmat else "No"
 df1["Hazmat"]=df["Customer"].apply(lambda x: find_hazmat(x))
 
 #drop first column leaving only phone and email
 df1 = df1.iloc[: ,1:]
-
-print(df1.head(10))
 
 #define dataframe 2 out of 2
 df2 = df["Customer"].str.split("\n", n=70, expand=True)
@@ -55,6 +53,13 @@ df2.rename(columns={df2.columns[0]: "Company"}, inplace=True)
 #create a "Port Serviced" column -- each extraction will need to be renamed
 df2.insert(0, "Port Serviced", "Savannah")
 
-print(df2)
+#extract only the needed columns
+df2 = df2[["Port Serviced", "Company"]]
 
+#determine frame order and concatenate them
+frames = [df2, df1]
+df3 = pd.concat(frames, axis=1)
+
+#write to csv
+df3.to_csv("sav_port_contacts.csv", index=False, header=True)
 
