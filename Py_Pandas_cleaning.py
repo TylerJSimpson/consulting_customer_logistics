@@ -1,5 +1,5 @@
-#WEBSCRAPED CSV CLEANING
-#Python3, Pandas, RegEx
+#CLEAN DRAYAGE.COM WEBSCRAPE
+#Python3, Pandas, Regular
 
 #import packages
 import pandas as pd
@@ -20,20 +20,20 @@ df = pd.DataFrame(data, columns=["Customer"])
 #define dataframe1 for email and phone extraction
 df1 = pd.DataFrame(data, columns=["Customer"])
 
-#function to find emails and add it to email column
 def find_email(text):
+    #find emails and add to Email column
     email = re.findall(r"[\w\.-]+@[\w\.-]+",str(text))
     return ",".join(email)
 df1["Email"]=df["Customer"].apply(lambda x: find_email(x))
 
-#function to find phone numbers and add it to phone column
 def find_phone(text):
+    #find phone numbers and add to Phone column
     phone = re.findall(r"[\d]{3}-[\d]{3}-[\d]{4}",str(text))
     return ",".join(phone)
 df1["Phone"]=df["Customer"].apply(lambda x: find_phone(x))
 
-#function to find hazmat status and add it to the hazmat column
 def find_hazmat(text):
+    #find hazmat status and simplify to yes or no in Hazmat column
     hazmat = re.findall("haz-mat=yes", str(text), re.IGNORECASE)
     return "Yes" if hazmat else "No"
 df1["Hazmat"]=df["Customer"].apply(lambda x: find_hazmat(x))
@@ -42,7 +42,11 @@ df1["Hazmat"]=df["Customer"].apply(lambda x: find_hazmat(x))
 df1 = df1.iloc[: ,1:]
 
 #define dataframe 2 out of 2
-df2 = df["Customer"].str.split("\n", n=70, expand=True)
+#first remove unwanted text between new lines
+df2 = df["Customer"].str.replace("Company: ", "")
+
+#split based on new lines from extraction
+df2 = df2.str.split("\n", n=70, expand=True)
 
 #drop column 1 "COMPANY DETAIL" text
 df2 = df2.iloc[: , 1:]
