@@ -9,7 +9,7 @@ import re as re
 pd.set_option('display.max_columns', 10)
 
 #read csv file
-data = pd.read_csv(r"C:\Users\simpsont\Downloads\output.csv", names=["Customer"], encoding="unicode_escape")
+data = pd.read_csv(r"C:\Users\Tyler Simpson\output.csv", names=["Customer"], encoding="unicode_escape")
 
 #drop null value columns to avoid errors
 data.dropna(inplace = True)
@@ -37,6 +37,30 @@ def find_hazmat(text):
     hazmat = re.findall("haz-mat=yes", str(text), re.IGNORECASE)
     return "Yes" if hazmat else "No"
 df1["Hazmat"]=df["Customer"].apply(lambda x: find_hazmat(x))
+
+def find_overweight(text):
+    #find overweight permit status and simplify to yes or no in overweight column
+    overweight = re.findall("overweight permit= yes", str(text), re.IGNORECASE)
+    return "Yes" if overweight else "No"
+df1["Overweight"]=df["Customer"].apply(lambda x: find_overweight(x))
+
+def find_transload(text):
+    #find transload permit status and simplify to yes or no in transload column
+    transload = re.findall("transload service= yes", str(text), re.IGNORECASE)
+    return "Yes" if transload else "No"
+df1["Transload"]=df["Customer"].apply(lambda x: find_transload(x))
+
+def find_storage(text):
+    #find storage capabilities and simplify to yes or no in storage column
+    storage = re.findall("storage", str(text), re.IGNORECASE)
+    return "Yes" if storage else "No"
+df1["Storage"]=df["Customer"].apply(lambda x: find_storage(x))
+
+def find_warehouse(text):
+    #find warehouse capabilities and simplify to yes or no in warehouse column
+    warehouse = re.findall("warehous", str(text), re.IGNORECASE)
+    return "Yes" if warehouse else "No"
+df1["Warehouse"]=df["Customer"].apply(lambda x: find_warehouse(x))
 
 #drop first column leaving only phone and email
 df1 = df1.iloc[: ,1:]
@@ -66,4 +90,3 @@ df3 = pd.concat(frames, axis=1)
 
 #write to csv
 df3.to_csv("sav_port_contacts.csv", index=False, header=True)
-
