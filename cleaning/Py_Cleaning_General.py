@@ -1,5 +1,5 @@
 #CLEAN DRAYAGE.COM WEBSCRAPE
-#Python3, Pandas, Regular
+#Python3, Pandas, RegEx
 #This is the template that will be used to clean every port
 #This text will be customized "create a "Port Serviced" column -- each extraction will need to be renamed"
 
