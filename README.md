@@ -7,7 +7,7 @@ ___
 #### Solution 2: Retrieved the 2021 data from customer source systems and built internal dashboards and generated an ad-hoc marketing campaign utilizing BigQuery and Data Studio.
 #### Future considerations would include parameterizing ports for a more robust code as well as deploying the code using docker. Due to the low velocity of change in the source data this consideration was not invluded in the initial build.
 ___
-#### Tools:
+### Tools:
 #### * Programming: Python (Pandas, Selenium, Regex), SQL
 #### * Cloud: GCP, BigQuery, Cloud Storage, Batch Load
 #### * Visualization: Data Studio
